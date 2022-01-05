@@ -1,0 +1,24 @@
+= Spring aws parameter store issue
+
+Cannot fetch parameters from ssm parameter store
+
+== How to reproduce?
+
+. Start docker compose in root dir: `docker-compose up`
+.. It will start ssm mock service with a parameter under the path: `/config/demo` like image below:
++
+image:img/ssm-param-store.png[]
+. Run `DemoApplicationTests` passing aws credentials as enviroment vars:
++
+image:img/run-test.png[]
+. The application will connect to the store but won't be able to fetch the parameters:
++
+----
+Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'demo.param' in value "${demo.param}"
+	at org.springframework.util.PropertyPlaceholderHelper.parseStringValue(PropertyPlaceholderHelper.java:180)
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:126)
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:239)
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:210)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936)
+----
