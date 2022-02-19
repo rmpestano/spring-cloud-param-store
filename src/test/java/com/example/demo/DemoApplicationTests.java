@@ -11,13 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestPropertySource(properties = {"aws.paramstore.endpoint=http://localhost:4566"})
 class DemoApplicationTests {
 
-
     @Value("${demo.param}")
     private String demoParam;
 
     @Test
     void contextLoads() {
-        assertEquals("test", demoParam);
+        assertEquals("from param store", demoParam);
     }
 
 }

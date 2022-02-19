@@ -22,3 +22,15 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'de
 	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:175)
 	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:936)
 ----
+
+[NOTE]
+====
+To run via maven (`mvn test`) you need to export the env vars before:
+
+----
+export AWS_ACCESS_KEY_ID=demo
+export AWS_SECRET_ACCESS_KEY=demo
+export AWS_REGION=
+----
+
+====

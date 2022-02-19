@@ -1,0 +1,6 @@
+aws:
+  paramstore:
+    prefix: "/config"
+    name: "demo"
+    enabled: "true"
+    region: "${AWS_REGION:eu-west-1}"
