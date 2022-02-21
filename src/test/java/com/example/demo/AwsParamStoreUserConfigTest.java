@@ -1,9 +1,9 @@
 package com.example.demo;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -15,14 +15,13 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testcontainers.containers.localstack.LocalStackContainer.Service.SSM;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Testcontainers
 @DirtiesContext
 @AutoConfigureWebTestClient
-class DemoApplicationTests {
+class AwsParamStoreUserConfigTest {
 
     @Autowired
     private WebTestClient webClient;
@@ -40,28 +39,25 @@ class DemoApplicationTests {
         System.setProperty("aws.secretKey", "secretkey");
         System.setProperty("aws.paramstore.region", "");
         System.setProperty("aws.paramstore.endpoint", localstack.getEndpointConfiguration(SSM).getServiceEndpoint());
-        putParameter(localstack, "/config/demo/demo.param", "from param store");
+        putParameter(localstack, "/config/demo/user.config.users_0_.name", "paramStoreUser1");
+        putParameter(localstack, "/config/demo/user.config.users_0_.pass", "paramStorepass1");
+        putParameter(localstack, "/config/demo/user.config.users_0_.roles_0_.name", "paramStoreAdmin");
+        putParameter(localstack, "/config/demo/user.config.users_0_.roles_1_.name", "paramStoreUser");
     }
 
-    @Value("${demo.param}")
-    private String demoParam;
 
     @Test
-    void shouldGetParameterFromParamStore() {
-        assertEquals("from param store", demoParam);
-    }
-
-    @Test
-    void shouldGetUserConfigFromApplicationProperties() {
+    @Disabled("Wait for https://github.com/awspring/spring-cloud-aws/pull/248")
+    void shouldGetUserConfigFromAwsParameterStore() {
         webClient.get()
                 .uri("/config")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.users[0].name").isEqualTo("user1")
-                .jsonPath("$.users[0].pass").isEqualTo("pass1")
-                .jsonPath("$.users[0].roles[0].name").isEqualTo("admin")
-                .jsonPath("$.users[0].roles[1].name").isEqualTo("user");
+                .jsonPath("$.users[0].name").isEqualTo("paramStoreUser1")
+                .jsonPath("$.users[0].pass").isEqualTo("paramStorepass1")
+                .jsonPath("$.users[0].roles[0].name").isEqualTo("paramStoreAdmin")
+                .jsonPath("$.users[0].roles[1].name").isEqualTo("paramStoreUser");
     }
 
     private static void putParameter(LocalStackContainer localstack, String parameterName, String parameterValue) {
@@ -74,4 +70,3 @@ class DemoApplicationTests {
     }
 
 }
-

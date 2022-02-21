@@ -6,7 +6,7 @@ services:
     image: localstack/localstack:latest
     container_name: localstack_aws
     environment:
-      - AWS_DEFAULT_REGION=eu-west-1
+      - AWS_DEFAULT_REGION=us-east-1
       - AWS_ACCESS_KEY_ID=demo
       - AWS_SECRET_ACCESS_KEY=demo
       - EDGE_PORT=4566

@@ -3,5 +3,13 @@ spring:
     name: 'demo'
   config:
     import: 'aws-parameterstore:'
+
 demo:
   param: 'from app properties'
+
+user.config.users:
+  -  name: 'user1'
+     pass: 'pass1'
+     roles:
+     - name: 'admin'
+     - name: 'user'
