@@ -4,4 +4,16 @@ image:https://github.com/rmpestano/spring-cloud-param-store/actions/workflows/ci
 
 Spring cloud aws parameter store sample app
 
+== Running
 
+. Export the following env vars:
++
+`export AWS_ACCESS_KEY_ID=test`, `export AWS_SECRET_ACCESS_KEY=test` `export AWS_REGION=`
+. Start docker compose: `docker-compose up`
+. Run `mvn pspring-boot:run`
+. Access http://localhost:8080/config
+
+
+== Running tests
+
+`mvn test`

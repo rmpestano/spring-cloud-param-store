@@ -82,6 +82,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <aws.paramstore.endpoint>http://localhost:4566</aws.paramstore.endpoint>
+                        <aws.paramstore.region></aws.paramstore.region>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
     </build>
