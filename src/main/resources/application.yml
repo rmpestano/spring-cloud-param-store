@@ -2,7 +2,7 @@ spring:
   application:
     name: 'demo'
   config:
-    import: 'aws-parameterstore:'
+    import: 'optional:aws-parameterstore:/'
 
 demo:
   param: 'from app properties'

@@ -53,6 +53,11 @@
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -86,6 +91,8 @@
                     <systemPropertyVariables>
                         <aws.paramstore.endpoint>http://localhost:4566</aws.paramstore.endpoint>
                         <aws.paramstore.region></aws.paramstore.region>
+                        <aws.aws.accessKeyId>demo</aws.aws.accessKeyId>
+                        <aws.secretKey>demo</aws.secretKey>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

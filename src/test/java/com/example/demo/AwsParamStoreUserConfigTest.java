@@ -40,7 +40,7 @@ class AwsParamStoreUserConfigTest {
         System.setProperty("aws.paramstore.region", "");
         System.setProperty("aws.paramstore.endpoint", localstack.getEndpointConfiguration(SSM).getServiceEndpoint());
         putParameter(localstack, "/config/demo/user.config.users_0_.name", "paramStoreUser1");
-        putParameter(localstack, "/config/demo/user.config.users_0_.pass", "paramStorepass1");
+        putParameter(localstack, "/config/demo/user.config.users_0_.pass", "paramStorePass1");
         putParameter(localstack, "/config/demo/user.config.users_0_.roles_0_.name", "paramStoreAdmin");
         putParameter(localstack, "/config/demo/user.config.users_0_.roles_1_.name", "paramStoreUser");
     }
@@ -55,7 +55,7 @@ class AwsParamStoreUserConfigTest {
                 .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$.users[0].name").isEqualTo("paramStoreUser1")
-                .jsonPath("$.users[0].pass").isEqualTo("paramStorepass1")
+                .jsonPath("$.users[0].pass").isEqualTo("paramStorePass1")
                 .jsonPath("$.users[0].roles[0].name").isEqualTo("paramStoreAdmin")
                 .jsonPath("$.users[0].roles[1].name").isEqualTo("paramStoreUser");
     }

@@ -8,12 +8,17 @@ Spring cloud aws parameter store sample app
 
 . Export the following env vars:
 +
-`export AWS_ACCESS_KEY_ID=test`, `export AWS_SECRET_ACCESS_KEY=test` `export AWS_REGION=`
 . Start docker compose: `docker-compose up`
 . Run `mvn pspring-boot:run`
 . Access http://localhost:8080/config
 
+[TIP]
+====
+If you run through the IDE or jar you'll need to pass the following system properties:
 
+`-Daws.paramstore.endpoint=http://localhost:4566 -Daws.accessKeyId=demo  -Daws.secretKey=demo -Daws.paramstore.region=`
+
+====
 == Running tests
 
 `mvn test`
