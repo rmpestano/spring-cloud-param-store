@@ -6,10 +6,8 @@ Spring cloud aws parameter store sample app
 
 == Running
 
-. Export the following env vars:
-+
 . Start docker compose: `docker-compose up`
-. Run `mvn pspring-boot:run`
+. Run `mvn spring-boot:run`
 . Access http://localhost:8080/config
 
 [TIP]
